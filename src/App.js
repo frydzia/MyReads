@@ -1,7 +1,7 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
-import BooksList from './BooksList.js'
+import React from 'react';
+import * as BooksAPI from './BooksAPI';
+import './App.css';
+import Shelf from './Shelf';
 
 
 
@@ -23,6 +23,14 @@ class BooksApp extends React.Component {
     })
   }
 
+  getBooksWithTheSameShelf(shelfName) {
+    return this.state.books.filter((b) => b.shelf === shelfName)
+  }
+
+  // updateBook() {
+  //   BooksAPI.update(book, shelf).then()
+  // }
+
   render() {
     return (
       <div className="app">
@@ -31,32 +39,18 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <BooksList books={ this.state.books }/>
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <BooksList books={ this.state.books }/>
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <BooksList books={ this.state.books }/>
-                    </ol>
-                  </div>
-                </div>
-              </div>
+              <Shelf
+                books={ this.getBooksWithTheSameShelf("currentlyReading") }
+                shelfTitle="Currently Reading"
+              />
+              <Shelf
+                books={ this.getBooksWithTheSameShelf("wantToRead") }
+                shelfTitle="Want To Read"
+              />
+              <Shelf
+                books={ this.getBooksWithTheSameShelf("read") }
+                shelfTitle="Read"
+              />
             </div>
             <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
