@@ -27,8 +27,44 @@ class BooksApp extends React.Component {
     return this.state.books.filter((b) => b.shelf === shelfName)
   }
 
-  // updateBook() {
-  //   BooksAPI.update(book, shelf).then()
+  // componentDidUpdate(prevState) {
+  //   if (this.state.book.id !== prevState.book.id) {
+  //     BooksAPI.update(book, shelf).then(
+  //       this.setState((state) => ({
+  //       books: this.state.books.filter(book.id !== prevState.book.id).concat([ book ])
+  //       }))
+  //     )
+  //   }
+  // }
+
+  moveBooksToNewShelf = (book, newShelf) => {
+    BooksAPI.update(book, newShelf).then(() => {
+      book.shelf = newShelf;
+
+      this.setState(state => ({
+        books: this.state.books.filter(b => b.id !== book.id).concat([ book ])
+      }));
+    });
+  };
+
+  // {
+  //   BooksAPI.update(book, shelf).then(this.state((prevState) => {
+  //     const newState = prevState.books.map(b => b.id !== book.id)
+  //   })
+  //
+  //   var currentBooks = [...this.state.books]
+  //   var booksToUpdate = currentBooks.filter(b => b.id !== book.id)  // get list of books without updated or new book
+  //
+  //
+  //
+  //     book.shelf = newShelf;
+  //
+  // //    var newBooks = this.state.books.filter((b) => b.id !== book.id);
+  //
+  //     this.setState((state) => ({
+  //       books: this.state.books.filter(b => b.id !== book.id).concat([ book ])
+  //     }))
+  //   });
   // }
 
   render() {
@@ -42,14 +78,17 @@ class BooksApp extends React.Component {
               <Shelf
                 books={ this.getBooksWithTheSameShelf("currentlyReading") }
                 shelfTitle="Currently Reading"
+                moveBooksToNewShelf={this.moveBooksToNewShelf}
               />
               <Shelf
                 books={ this.getBooksWithTheSameShelf("wantToRead") }
                 shelfTitle="Want To Read"
+                moveBooksToNewShelf={this.moveBooksToNewShelf}
               />
               <Shelf
                 books={ this.getBooksWithTheSameShelf("read") }
                 shelfTitle="Read"
+                moveBooksToNewShelf={this.moveBooksToNewShelf}
               />
             </div>
             <div className="open-search">

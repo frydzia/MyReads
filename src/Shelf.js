@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Book from './Book.js';
+import PropTypes from "prop-types";
 
 class Shelf extends Component {
+  static propTypes = {
+    moveBooksToNewShelf: PropTypes.func.isRequired
+  }
+
   render() {
     return (
       <div className="bookshelf">
@@ -12,6 +17,7 @@ class Shelf extends Component {
               <li key={book.id}>
                 <Book
                   book={book}
+                  moveBooksToNewShelf={ this.props.moveBooksToNewShelf }
                   shelf={this.props.shelf}
                 />
               </li>
