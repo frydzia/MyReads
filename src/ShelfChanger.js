@@ -11,15 +11,8 @@ class ShelfChanger extends Component {
 
   moveBooksToNewShelf = (event) => {
     this.props.moveBooksToNewShelf(this.props.book, event.target.value);
-    this.setState({ currentShelf: event.target.value } /*, this.moveBook*/);
-
+    this.setState({ currentShelf: event.target.value });
   }
-
-  // moveBook = () => {
-  //   this.props.moveBooksToNewShelf(this.props.book, this.state.currentShelf)
-  // }
-
-
 
   render() {
     return(

@@ -17,7 +17,7 @@ class Shelf extends Component {
               <li key={book.id}>
                 <Book
                   book={book}
-                  moveBooksToNewShelf={ this.props.moveBooksToNewShelf }
+                  moveBooksToNewShelf={this.props.moveBooksToNewShelf}
                   shelf={this.props.shelf}
                 />
               </li>
