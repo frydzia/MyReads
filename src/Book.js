@@ -9,6 +9,7 @@ class Book extends Component {
   };
 
   render() {
+    // set black image for books with no cover
     const cover = this.props.book.imageLinks && this.props.book.imageLinks.thumbnail ? this.props.book.imageLinks.thumbnail : "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Black_colour.jpg/180px-Black_colour.jpg"
 
     return (
@@ -19,7 +20,6 @@ class Book extends Component {
             <ShelfChanger
               book={this.props.book}
               moveBooksToNewShelf={this.props.moveBooksToNewShelf}
-              shelf={this.props.currentShelf}
           />
           </div>
           <div className="book-title">{this.props.book.title}</div>

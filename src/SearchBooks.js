@@ -20,9 +20,23 @@ class Search extends Component {
     this.setState({ query: query.trim() })
 
     if (query) {
+      // search for books that match your query
       BooksAPI.search(query, 20).then((books) => {
-        books.length > 0 ? this.setState({ booksFromSearch: books }) : this.setState({ booksFromSearch: [], searchResult: true })
+        if (books.length > 0) {
+          // check if searched books are also on the main page: if yes - assign them the appropriate shelves, if no - assign them "none" shelf
+          books.forEach((book, index) => {
+            let currentBook = this.props.books.find((b) => b.id === book.id);
+            book.shelf = currentBook ? currentBook.shelf : 'none';
+            books[index] = book;
+          })
+
+          this.setState({ booksFromSearch: books })
+        } else {
+          // if there are no matching results, set searchResult as true to show info "No search results!"
+          this.setState({ booksFromSearch: [], searchResult: true })
+        }
       })
+    // if there is no query, do not show anything  
     } else this.setState({ booksFromSearch: [], searchResult: false })
   }
 
@@ -59,7 +73,6 @@ class Search extends Component {
                     <Book
                       book={book}
                       moveBooksToNewShelf={this.props.moveBooksToNewShelf}
-                      shelf={this.props.shelf}
                     />
                   </li>
                 ))}

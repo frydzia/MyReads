@@ -7,7 +7,9 @@ class ShelfChanger extends Component {
      moveBooksToNewShelf: PropTypes.func.isRequired
   };
 
-  state = { currentShelf: this.props.book.shelf }
+  state = {
+    currentShelf: this.props.book.shelf
+  }
 
   moveBooksToNewShelf = (event) => {
     this.props.moveBooksToNewShelf(this.props.book, event.target.value);
