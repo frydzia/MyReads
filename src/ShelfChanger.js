@@ -5,7 +5,7 @@ class ShelfChanger extends Component {
   static propTypes = {
      book: PropTypes.object.isRequired,
      moveBooksToNewShelf: PropTypes.func.isRequired
-  };
+  }
 
   state = {
     currentShelf: this.props.book.shelf

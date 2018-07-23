@@ -8,7 +8,7 @@ class Search extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
     moveBooksToNewShelf: PropTypes.func.isRequired
-  };
+  }
 
   state = {
     query: '',
@@ -36,7 +36,7 @@ class Search extends Component {
           this.setState({ booksFromSearch: [], searchResult: true })
         }
       })
-    // if there is no query, do not show anything  
+    // if there is no query, do not show anything
     } else this.setState({ booksFromSearch: [], searchResult: false })
   }
 

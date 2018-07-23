@@ -29,9 +29,9 @@ class BooksApp extends React.Component {
       // compare the id of old and new books, update state
       this.setState(state => ({
         books: this.state.books.filter(b => b.id !== book.id).concat([ book ])
-      }));
-    });
-  };
+      }))
+    })
+  }
 
   render() {
     return (
