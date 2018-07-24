@@ -17,9 +17,9 @@ class Search extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query: query })
 
-    if (query) {
+    if (query.trim()) {
       // search for books that match your query
       BooksAPI.search(query, 20).then((books) => {
         if (books.length > 0) {
@@ -61,7 +61,6 @@ class Search extends Component {
               <input
                 type="text"
                 placeholder="Search by title or author"
-                value={this.state.query}
                 onChange={(event) => this.updateQuery(event.target.value)}
               />
             </div>
